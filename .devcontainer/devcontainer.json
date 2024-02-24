@@ -1,0 +1,16 @@
+{
+	"name": "C# (.NET)",
+	"image": "mcr.microsoft.com/devcontainers/dotnet:1-8.0",
+	"customizations": { 
+		"vscode": {
+			"settings": {
+				"csharp.debug.logging.moduleLoad": false,
+				"csharp.debug.console": "externalTerminal"
+			},
+			"extensions": [
+				"ms-dotnettools.csdevkit",
+				"ms-vsliveshare.vsliveshare" 
+			]
+		}
+	}
+}
