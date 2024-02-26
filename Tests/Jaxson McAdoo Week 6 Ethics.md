@@ -31,4 +31,4 @@ Third
 * Shows commitment to job
 * Personal discomfort
 
-Personal Choice (Sydney's Third Response) I think that with the choices provided, I would probably choose Sydney's third respone. While I am still doing my job to the best of my ability, I do still care about the people who might get laid off and would want to try and help them if at all possible.
+Personal Choice (Sydney's Third Response) I think that with the choices provided, I would probably choose Sydney's third response. While I am still doing my job to the best of my ability, I do still care about the people who might get laid off and would want to try and help them if at all possible.
