@@ -1,4 +1,8 @@
 ﻿using System.Globalization;
+using System.Runtime.CompilerServices;
+
+using Microsoft.VisualBasic;
+
 
 public class Assignment : IAssignment
 {
@@ -24,7 +28,11 @@ public class Assignment : IAssignment
         ValidateParameters();
 
         // Implementation goes here.
-        throw new NotImplementedException();
+        for(int i = 0; i < count; i++)
+        {
+            var filename = Helper.GetRandomFilename();
+            Helper.WriteImageFile(_rootDirectory, filename);
+        }
 
         void ValidateParameters()
         {
@@ -46,7 +54,31 @@ public class Assignment : IAssignment
         ValidatePreconditions();
 
         // Implementation goes here.
-        throw new NotImplementedException();
+        string[] files = Directory.GetFiles(_rootDirectory , "*.txt", SearchOption.AllDirectories);
+        for (int i = 0; i < files.Length; i++)
+        {
+            var path = files[i];
+            string fileName = Path.GetFileName(path);
+            //extract year and month from file name
+            var createTime = File.GetCreationTime(path);
+            var year = createTime.Year.ToString();
+            var month = createTime.Month.ToString();
+            //create year directory
+            var yearDirectory = Path.Combine(_rootDirectory, year);
+            if (!Directory.Exists(yearDirectory))
+            {
+                Directory.CreateDirectory(yearDirectory);
+            }
+            var monthDirectory = Path.Combine(yearDirectory, month);
+            if (!Directory.Exists(monthDirectory))
+            {
+                Directory.CreateDirectory(monthDirectory);
+            }
+            //create month directory inside year directory
+            //move my file in path to it's new directory using fileName
+            string destination = Path.Combine(monthDirectory, fileName);
+            File.Move(path, destination);
+        }
 
         void ValidatePreconditions()
         {
@@ -77,6 +109,7 @@ public class Assignment : IAssignment
         }
 
         // Implementation goes here.
-        throw new NotImplementedException();
+        //delete everyting including root directory
+        Directory.Delete(_rootDirectory, recursive: true);
     }
 }
