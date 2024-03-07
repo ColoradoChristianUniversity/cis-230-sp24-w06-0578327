@@ -30,7 +30,7 @@ public class Assignment : IAssignment
         // Implementation goes here.
         for(int i = 0; i < count; i++)
         {
-            var filename = Helper.GetRandomFilename();
+            var filename = Helper.GetRandomFilename("png");
             Helper.WriteImageFile(_rootDirectory, filename);
         }
 
@@ -54,29 +54,23 @@ public class Assignment : IAssignment
         ValidatePreconditions();
 
         // Implementation goes here.
-        string[] files = Directory.GetFiles(_rootDirectory , "*.txt", SearchOption.AllDirectories);
+        string[] files = Directory.GetFiles(_rootDirectory , "*.png", SearchOption.AllDirectories);
         for (int i = 0; i < files.Length; i++)
         {
             var path = files[i];
             string fileName = Path.GetFileName(path);
             //extract year and month from file name
-            var createTime = File.GetCreationTime(path);
-            var year = createTime.Year.ToString();
-            var month = createTime.Month.ToString();
-            //create year directory
-            var yearDirectory = Path.Combine(_rootDirectory, year);
+            var year = fileName[0..4];
+            var month = fileName[5..7];
+
+            var yearDirectory = Path.Combine(_rootDirectory, year, month);
             if (!Directory.Exists(yearDirectory))
             {
                 Directory.CreateDirectory(yearDirectory);
             }
-            var monthDirectory = Path.Combine(yearDirectory, month);
-            if (!Directory.Exists(monthDirectory))
-            {
-                Directory.CreateDirectory(monthDirectory);
-            }
             //create month directory inside year directory
             //move my file in path to it's new directory using fileName
-            string destination = Path.Combine(monthDirectory, fileName);
+            string destination = Path.Combine(yearDirectory, fileName);
             File.Move(path, destination);
         }
 
